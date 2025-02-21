@@ -4,12 +4,13 @@ from scipy.signal import  stft
 import plotly.graph_objects as go
 from pyVHR.plot.visualize import VisualizeParams
 from pyVHR.BPM.utils import *
-from scipy.stats import median_abs_deviation as mad
 from pyVHR.extraction.utils import *
 
 """
 This module contains classes and methods for transforming a BVP signal in a BPM signal.
 """
+
+from scipy import stats
 
 class BVPsignal:
     """
@@ -423,7 +424,7 @@ def BPM_median(bpms):
     MAD = np.zeros((len(bpms),))
     for i,bpm in enumerate(bpms):
         median_bpms[i] = np.float32(np.median(bpm))
-        MAD[i] = np.float32(mad(bpm))                
+        MAD[i] = np.float32(stats.median_abs_deviation(bpm))  # 这里替换 mad(bpm)
     return median_bpms, MAD
 
 def BVP_to_BPM(bvps, fps, minHz=0.65, maxHz=4.):

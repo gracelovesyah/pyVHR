@@ -82,6 +82,7 @@ class PURE(Dataset):
                     width = frames[0].shape[1]
                     height = frames[0].shape[0]
                     #fourcc = cv2.VideoWriter_fourcc(*'MPNG')
+                    print(f'processing{dirname}')
                     writer = cv2.VideoWriter(dirname + '/' + d + '.avi', 0, fps, (width, height))
                     for frame in frames:
                         writer.write(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
